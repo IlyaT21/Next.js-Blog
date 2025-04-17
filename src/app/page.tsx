@@ -2,6 +2,7 @@ import fs from "fs";
 import Link from "next/link";
 import matter from "gray-matter";
 import { PostMetadata } from "@/components/PostMetadata";
+import { Button } from "@/components/ui/button";
 
 const getPostMetadata = (): PostMetadata[] => {
   const folder = "posts/";
@@ -25,14 +26,18 @@ const getPostMetadata = (): PostMetadata[] => {
 export default function Home() {
   const postMetadata = getPostMetadata();
   const postPreviews = postMetadata.map((post) => (
-    <div key={post.slug}>
-      <Link href={`/posts/${post.slug}`}>
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-          {post.title}
-        </h3>
-      </Link>
-      <p className="leading-7 [&:not(:first-child)]:mt-6">{post.subtitle}</p>
-      <p className="text-xl text-muted-foreground">{post.date}.</p>
+    <div
+      key={post.slug}
+      className="w-full max-w-[520px] lg:w-[31%] p-4 border rounded-xl"
+    >
+      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+        {post.title}
+      </h3>
+      <p className="leading-7 [&:not(:first-child)]:mt-4">{post.subtitle}</p>
+      <p className="text-xl text-muted-foreground mt-2">{post.date}.</p>
+      <Button asChild className="mt-4">
+        <Link href={`/posts/${post.slug}`}>Read More</Link>
+      </Button>
     </div>
   ));
 
@@ -41,7 +46,9 @@ export default function Home() {
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Supercool Blog
       </h1>
-      <div className="flex flex-col items-start gap-4">{postPreviews}</div>
+      <div className="flex flex-col lg:flex-row items-start lg:justify-between gap-4 flex-wrap gap-y-12">
+        {postPreviews}
+      </div>
     </div>
   );
 }

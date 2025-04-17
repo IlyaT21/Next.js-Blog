@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with AWS"
-subtitle: "Create an AWS account and set up CLI/SDK access."
+subtitle: "Create an Amazon Web Service account and set up CLI/SDK access."
 date: "2020-12-27"
 ---
 
