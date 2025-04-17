@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Next.js Blog",
   description: "Blog using Next.js and Shadcn/ui",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +33,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        <main className="flex flex-col items-center w-full">{children}</main>
+        <main className="flex flex-col items-center w-full gap-8 min-h-[65vh]">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
