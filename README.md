@@ -1,36 +1,162 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Markdown Blog with Shadcn/UI & Tailwind
+
+A modern, **TypeScript** blog built with the Next.js App Router, **Shadcn/UI**, and **Tailwind CSS**. Posts are written in Markdown, parsed with `gray-matter`, and styled using Tailwind’s Typography plugin. Dynamic metadata (title, description, Open Graph) is generated per post.
+
+---
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Prerequisites](#prerequisites)
+3. [Getting Started](#getting-started)
+   - [Installation](#installation)
+   - [Development](#development)
+   - [Build & Production](#build--production)
+4. [Writing Posts](#writing-posts)
+5. [Styling & Components](#styling--components)
+   - [Tailwind & Typography](#tailwind--typography)
+   - [Shadcn/UI](#shadcnui)
+   - [Markdown Renderer](#markdown-renderer)
+6. [SEO & Metadata](#seo--metadata)
+7. [Deployment](#deployment)
+8. [Contributing](#contributing)
+9. [License](#license)
+
+---
+
+## Features
+
+- **Next.js App Router** for file-system–based routing and SSG/SSR
+- **TypeScript** for type safety
+- Markdown-based posts with frontmatter (`title`, `subtitle`, `date`, etc.)
+- Dynamic metadata via `generateMetadata` (title, description, Open Graph)
+- Styled with **Tailwind CSS** + `@tailwindcss/typography` plugin
+- UI components from **Shadcn/UI**
+- Custom reusable **`Stack`** layout component
+- Responsive design and dark mode support
+
+## Prerequisites
+
+- Node.js v16+ (recommended)
+- npm or yarn
 
 ## Getting Started
 
-First, run the development server:
+### Installation
 
 ```bash
-npm run dev
+# Clone the repo
+git clone git@github.com:IlyaT21/Next.js-Blog.git
+cd Next.js-Blog
+
+# Install dependencies
+npm install
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Start development server
+npm run dev
+# or
+# yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+### Build & Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Build for production
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Preview the production build
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Writing Posts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Create a new `.md` file under `/posts`, e.g. `my-new-post.md`.
+2. Add YAML frontmatter at the top:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```markdown
+   ---
+   title: "My New Post"
+   subtitle: "An intro to my new post"
+   date: "2025-04-18"
+   ---
+
+   # Heading
+
+   Your markdown content here.
+   ```
+
+3. Save and view at `http://localhost:3000/posts/my-new-post`.
+
+## Styling & Components
+
+### Tailwind & Typography
+
+- Typography plugin (`@tailwindcss/typography`) provides the `.prose` class for rendered Markdown.
+- Dark mode support with `dark:prose-invert`.
+
+```tsx
+<div className="prose prose-neutral dark:prose-invert">
+  <Markdown>{content}</Markdown>
+</div>
+```
+
+### Shadcn/UI
+
+- Utility-first, unopinionated components.
+- Install via `npm install @shadcn/ui` and configure per docs.
+
+### Markdown Renderer
+
+- Uses `react-markdown` under the hood.
+- Customize elements via `components` prop to swap in Shadcn/UI components.
+
+## SEO & Metadata
+
+- `generateStaticParams` defines dynamic routes at build time.
+- `generateMetadata` in `[slug]/page.tsx` returns a `Metadata` object:
+  ```ts
+  export async function generateMetadata({ params }) {
+    const post = getPostMetadata().find((p) => p.slug === params.slug);
+    return {
+      title: post.title,
+      description: post.subtitle,
+      openGraph: {
+        title: post.title,
+        description: post.subtitle,
+        type: "article",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title,
+        description: post.subtitle,
+      },
+    };
+  }
+  ```
+
+## Deployment
+
+- Deploy on Vercel for zero-configuration: push to GitHub and import repo.
+- Ensure `NEXT_PUBLIC_BASE_URL` is set for absolute URL generation if needed.
+
+## Contributing
+
+1. Fork the repo
+2. Create a branch: `git checkout -b feature/name`
+3. Commit changes: `git commit -m 'feat: describe your change'`
+4. Push branch: `git push origin feature/name`
+5. Open a Pull Request
+
+## License
+
+This project is open source under the [MIT License](LICENSE).

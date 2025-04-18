@@ -7,7 +7,7 @@ function Header() {
     <div className="flex flex-row items-center justify-between w-full max-w-[1360px] mx-auto gap-8 mb-16 mt-8">
       <Link className="flex flex-row items-center gap-4" href="/">
         <Image src="/logo.svg" alt="Logo" width={48} height={48} />
-        SuperCool Blog
+        Next Blog
       </Link>
     </div>
   );

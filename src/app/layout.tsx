@@ -16,10 +16,33 @@ const geistMono = Geist_Mono({
 
 // Site global metadata
 export const metadata: Metadata = {
-  title: "Next.js Blog",
-  description: "Blog using Next.js and Shadcn/ui",
+  title: "Next Blog",
+  description: "Blog created using Next.js and Shadcn/ui along with Tailwind",
+  keywords: ["Next", "React", "Blog", "JavaScript", "Test"],
   icons: {
     icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: "Next Blog",
+    description: "Blog created using Next.js and Shadcn/ui along with Tailwind",
+    siteName: "Next Blog",
+    type: "website",
+    images: [
+      {
+        url: "socials-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Next Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Next Blog",
+    description: "Blog created using Next.js and Shadcn/ui along with Tailwind",
+    images: ["/socials-image.jpg"],
+    creator: "@IlijaToskovic",
   },
 };
 
