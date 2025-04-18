@@ -14,7 +14,6 @@ A modern, **TypeScript** blog built with the Next.js App Router, **Shadcn/UI**, 
    - [Build & Production](#build--production)
 4. [Writing Posts](#writing-posts)
 5. [Styling & Components](#styling--components)
-   - [Tailwind & Typography](#tailwind--typography)
    - [Shadcn/UI](#shadcnui)
    - [Markdown Renderer](#markdown-renderer)
 6. [SEO & Metadata](#seo--metadata)
@@ -98,17 +97,6 @@ npm run start
 3. Save and view at `http://localhost:3000/posts/my-new-post`.
 
 ## Styling & Components
-
-### Tailwind & Typography
-
-- Typography plugin (`@tailwindcss/typography`) provides the `.prose` class for rendered Markdown.
-- Dark mode support with `dark:prose-invert`.
-
-```tsx
-<div className="prose prose-neutral dark:prose-invert">
-  <Markdown>{content}</Markdown>
-</div>
-```
 
 ### Shadcn/UI
 

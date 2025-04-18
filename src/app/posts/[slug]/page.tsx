@@ -45,7 +45,7 @@ export default async function PostPage({ params }: Props) {
         {slug}
       </h1>
       <div className="flex flex-col items-center gap-4">
-        <Markdown className="markdown-content">{content}</Markdown>
+        <Markdown>{content}</Markdown>
       </div>
     </div>
   );
