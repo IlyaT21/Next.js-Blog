@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Site global metadata
 export const metadata: Metadata = {
   title: "Next.js Blog",
   description: "Blog using Next.js and Shadcn/ui",

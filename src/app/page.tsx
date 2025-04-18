@@ -1,44 +1,10 @@
-import fs from "fs";
-import Link from "next/link";
-import matter from "gray-matter";
-import { PostMetadata } from "@/components/PostMetadata";
-import { Button } from "@/components/ui/button";
-
-const getPostMetadata = (): PostMetadata[] => {
-  const folder = "posts/";
-  const files = fs.readdirSync(folder);
-  const markdownPosts = files.filter((file) => file.endsWith(".md"));
-
-  const posts = markdownPosts.map((fileName) => {
-    const fileContents = fs.readFileSync(`posts/${fileName}`, "utf8");
-    const matterResult = matter(fileContents);
-    return {
-      title: matterResult.data.title,
-      date: matterResult.data.date,
-      subtitle: matterResult.data.subtitle,
-      slug: fileName.replace(".md", ""),
-    };
-  });
-
-  return posts;
-};
+import getPostMetadata from "@/components/utility/getPostMetadata";
+import PostPreview from "@/components/homepage/PostPreview";
 
 export default function Home() {
   const postMetadata = getPostMetadata();
   const postPreviews = postMetadata.map((post) => (
-    <div
-      key={post.slug}
-      className="w-full max-w-[520px] lg:w-[31%] p-4 border rounded-xl"
-    >
-      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-        {post.title}
-      </h3>
-      <p className="leading-7 [&:not(:first-child)]:mt-4">{post.subtitle}</p>
-      <p className="text-xl text-muted-foreground mt-2">{post.date}.</p>
-      <Button asChild className="mt-4">
-        <Link href={`/posts/${post.slug}`}>Read More</Link>
-      </Button>
-    </div>
+    <PostPreview key={post.slug} {...post} />
   ));
 
   return (

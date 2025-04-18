@@ -9,11 +9,6 @@ function Header() {
         <Image src="/logo.svg" alt="Logo" width={48} height={48} />
         SuperCool Blog
       </Link>
-
-      <nav className="flex flex-row gap-4 items-center">
-        <Link href="#">Blog</Link>
-        <Link href="#">Privacy Policy</Link>
-      </nav>
     </div>
   );
 }

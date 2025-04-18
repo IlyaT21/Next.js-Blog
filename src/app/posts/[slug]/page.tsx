@@ -1,22 +1,23 @@
 import React from "react";
-import fs from "fs";
 import Markdown from "markdown-to-jsx";
+import getPostMetadata from "@/components/utility/getPostMetadata";
+import { getPostContent } from "@/lib/getPostContent";
 
-type PostPageProps = {
-  params: {
-    slug: string;
-  };
+type Props = {
+  params: Promise<{ slug: string }>;
 };
 
-const getPostContent = (slug: string) => {
-  const folder = "posts/";
-  const file = `${folder}${slug}.md`;
-  const content = fs.readFileSync(file, "utf8");
-  return content;
-};
+// Generate posts as static pages
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const posts = getPostMetadata();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
-function PostPage({ params }: PostPageProps) {
-  const slug = params.slug;
+export default async function PostPage({ params }: Props) {
+  const { slug } = await params;
+
   const content = getPostContent(slug);
 
   return (
@@ -30,5 +31,3 @@ function PostPage({ params }: PostPageProps) {
     </div>
   );
 }
-
-export default PostPage;
